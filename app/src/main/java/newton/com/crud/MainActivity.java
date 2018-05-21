@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import newton.com.crud.Controle.Pessoa;
+import newton.com.crud.DAO.UsuarioDao;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,9 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Pessoa pessoa = new Pessoa();
                 pessoa.salvarRegistro(nome_usuario,senha_usuario);
-
-                Log.i("teste de salvar","Passou aki com nome "+ nome_usuario + " e a senha "+ senha_usuario );
-
+                nome.setText("");
+                senha.setText("");
 
             }
         });

@@ -11,9 +11,9 @@ public class UsuarioDao {
 
     private SQLiteDatabase sql;
 
-    public UsuarioDao(Context context){
-        DbHelper dbHelper = new DbHelper(context);
-        sql = dbHelper.getWritableDatabase();
+    public UsuarioDao(){
+        DbHelper db = DbHelper.getInstancia();
+        sql = db.getWritableDatabase();
     }
 
 
@@ -24,7 +24,6 @@ public class UsuarioDao {
         cv.put("senha", ser.getSenha());
 
         sql.insert("tbl_usuario",null,cv);
-        Log.i("INFO DB","crioeeeeacwxwdeeeeeeeeeeu a tabela" );
     }
 
 

@@ -7,20 +7,36 @@ import android.util.Log;
 
 public class DbHelper extends SQLiteOpenHelper {
 
-    private static final String NOME_DB = "BANCODEDADOS";
-    private static final int VERSAO = 1;
+    public static String NOME_DB = "BANCODEDADOS";
+    public static int VERSAO = 1;
+    public static String TBL_USUARIO = "tbl_usuario";
+
+    private static DbHelper instancia;
 
 
-    public DbHelper(Context context) {
-        super(context, NOME_DB, null, VERSAO);
-        Log.i("INFO DB","testeeeeeeeeeeeeeeeeeeeee" );
+    public static DbHelper getInstancia() {
+        if (instancia == null) instancia = new DbHelper();
+        return instancia;
+    }
+
+    public DbHelper() {
+        super(MyApp.getContext(), NOME_DB, null, VERSAO);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("CREATE TABLE tbl_usuario (_id INTEGER PRIMARY KEY AUTOINCREMENT,nome TEXT,senha TEXT);");
-        Log.i("INFO DB","testeeeeeeeeeeeeeeeeeeeee" );
+        String sql = "CREATE TABLE IF NOT EXISTS " + TBL_USUARIO+ " " +
+                "(_id INTEGER PRIMARY KEY AUTOINCREMENT,nome TEXT,senha TEXT);";
+
+        try {
+
+            db.execSQL(sql);
+            Log.i("INFO DB","Criacao da tabela com sucesso" );
+
+        }catch (Exception e){
+            Log.i("INFO DB","Erro ao criar a tabela" + e.getMessage());
+        }
     }
 
     @Override
